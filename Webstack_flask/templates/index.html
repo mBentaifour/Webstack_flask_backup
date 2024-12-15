@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bricolage Express</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-tools"></i>
+                <h1>Bricolage Express</h1>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('home') }}" class="nav-link active">
+                    <i class="fas fa-home"></i> Accueil
+                </a>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('view_cart') }}" class="nav-link">
+                        <i class="fas fa-shopping-cart"></i> Panier
+                    </a>
+                    <a href="{{ url_for('admin_dashboard') }}" class="nav-link admin-link">
+                        <i class="fas fa-cog"></i> Administration
+                    </a>
+                    <a href="{{ url_for('logout') }}" class="nav-link">
+                        <i class="fas fa-sign-out-alt"></i> Déconnexion
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="nav-link">
+                        <i class="fas fa-sign-in-alt"></i> Connexion
+                    </a>
+                {% endif %}
+            </div>
+        </nav>
+        
+        <!-- Barre de recherche et filtres -->
+        <div class="search-filter-container">
+            <form action="{{ url_for('home') }}" method="GET" class="search-form">
+                <div class="search-input-container">
+                    <input type="text" 
+                           name="search" 
+                           placeholder="Rechercher un produit..." 
+                           value="{{ search_query }}"
+                           class="search-input">
+                    <button type="submit" class="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                
+                <div class="category-filter">
+                    <select name="category" class="category-select" onchange="this.form.submit()">
+                        <option value="">Toutes les catégories</option>
+                        {% for category in categories %}
+                            <option value="{{ category }}" 
+                                    {% if category == selected_category %}selected{% endif %}>
+                                {{ category }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </form>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h2>Bienvenue chez Bricolage Express</h2>
+            <p>Votre destination pour tous vos besoins en bricolage et jardinage</p>
+        </div>
+    </div>
+
+    <main>
+        <div class="categories-filter">
+            <h3>Catégories</h3>
+            <div class="category-buttons">
+                <button class="category-btn active" data-category="all">Tous les produits</button>
+                <button class="category-btn" data-category="Outillage">Outillage</button>
+                <button class="category-btn" data-category="Jardinage">Jardinage</button>
+                <button class="category-btn" data-category="Peinture">Peinture</button>
+                <button class="category-btn" data-category="Quincaillerie">Quincaillerie</button>
+            </div>
+        </div>
+
+        <section class="products">
+            <div class="product-grid">
+                {% for product in products %}
+                <div class="product-card" data-category="{{ product.category }}">
+                    <div class="product-image">
+                        {% if product.image_url %}
+                        <img src="{{ product.image_url }}" alt="{{ product.name }}">
+                        {% else %}
+                        <div class="no-image">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="product-info">
+                        <h3>{{ product.name }}</h3>
+                        <p class="description">{{ product.description }}</p>
+                        <div class="product-details">
+                            <p class="price">{{ "%.2f"|format(product.price) }} €</p>
+                            <p class="stock {% if product.stock < 5 %}low-stock{% endif %}">
+                                {% if product.stock > 0 %}
+                                    <i class="fas fa-check"></i> En stock ({{ product.stock }})
+                                {% else %}
+                                    <i class="fas fa-times"></i> Rupture de stock
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="product-actions">
+                            <a href="{{ url_for('edit_product', id=product.id) }}" class="btn edit-btn">
+                                <i class="fas fa-edit"></i> Modifier
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Bricolage Express</h4>
+                <p>Votre partenaire de confiance pour tous vos projets de bricolage</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contactez-nous</h4>
+                <p><i class="fas fa-phone"></i> +212 123 456 789</p>
+                <p><i class="fas fa-envelope"></i> contact@bricolage-express.com</p>
+            </div>
+            <div class="footer-section">
+                <h4>Suivez-nous</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Bricolage Express. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const productCards = document.querySelectorAll('.product-card');
+
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const category = button.dataset.category;
+                    
+                    // Update active button
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    // Filter products
+                    productCards.forEach(card => {
+                        if (category === 'all' || card.dataset.category === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

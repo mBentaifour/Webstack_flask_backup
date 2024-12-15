@@ -1,0 +1,299 @@
+/* Variables */
+:root {
+    --primary: #4e73df;
+    --primary-dark: #2e59d9;
+    --secondary: #858796;
+    --success: #1cc88a;
+    --danger: #e74a3b;
+    --warning: #f6c23e;
+    --info: #36b9cc;
+    --white: #ffffff;
+    --light: #f8f9fa;
+    --dark: #5a5c69;
+    --body-color: #858796;
+}
+
+/* Style général */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light);
+    color: var(--body-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 76px;
+}
+
+/* Navigation */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--primary) !important;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--dark) !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary) !important;
+}
+
+.navbar .btn-primary {
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    padding: 5rem 0;
+    margin-top: -1rem;
+    color: var(--white);
+}
+
+.hero-section h1 {
+    font-weight: 700;
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-section .btn {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 500;
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-title {
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+/* Badges */
+.badge {
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: 500;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.btn-outline-primary {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-outline-primary:hover {
+    background: var(--primary);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* Features Section */
+.features-section {
+    padding: 5rem 0;
+    background: var(--white);
+}
+
+.feature-card {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 15px;
+    background: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.feature-card i {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+/* Footer */
+.footer {
+    background: var(--dark);
+    color: var(--light);
+    padding: 5rem 0 0;
+    margin-top: auto;
+}
+
+.footer h5 {
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.footer p {
+    color: rgba(255,255,255,0.7);
+}
+
+.footer-links ul li {
+    margin-bottom: 1rem;
+}
+
+.footer-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--white);
+    padding-left: 5px;
+}
+
+.footer-contact p {
+    margin-bottom: 1rem;
+}
+
+.footer-contact a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-contact a:hover {
+    color: var(--white);
+}
+
+.social-links a {
+    color: rgba(255,255,255,0.7);
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--white);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Search Bar */
+.search-form .input-group {
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.search-form .form-control {
+    border: none;
+    padding: 0.75rem 1.5rem;
+    background: var(--light);
+}
+
+.search-form .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0 50px 50px 0;
+}
+
+/* Alerts */
+.alert {
+    border: none;
+    border-radius: 15px;
+    padding: 1rem 1.5rem;
+}
+
+/* Categories */
+.category-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 2rem 0;
+}
+
+.category-filters .btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+}
+
+/* Product Details */
+.product-details {
+    background: var(--light);
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin: 1rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section {
+        text-align: center;
+        padding: 3rem 0;
+    }
+
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .feature-card {
+        margin-bottom: 1.5rem;
+    }
+
+    .footer {
+        text-align: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}
